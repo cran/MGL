@@ -1,0 +1,18 @@
+citHeader("To cite package 'MGL' in publications use:")
+     
+citEntry(entry="inproceedings",
+  title = "Efficient Dimensionality Reduction for High-Dimensional Network Estimation",
+  author = personList(as.person("Safiye Celik"),
+                      as.person("Benjamin A. Logsdon"),
+                      as.person("Su-In Lee")),
+  booktitle = "Proceedings of The 31st International Conference on Machine Learning",
+  publisher = "http://jmlr.csail.mit.edu/",
+  year = "2014",
+  editor = "Eric P. Xing and Tony Jebara",
+  pages = "1953-1961",
+  url = "https://sites.google.com/a/cs.washington.edu/mgl/",
+  textVersion = paste("Efficient Dimensionality Reduction for High-Dimensional Network Estimation, ",
+                      "Safiye Celik, Benjamin A. Logsdon, Su-In Lee, ",
+                      "Proceedings of The 31st International Conference on Machine Learning, ",
+                      "2014, p. 1953--1961. ")
+)
