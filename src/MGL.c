@@ -267,7 +267,7 @@ void performMGL(double *data, double *L, int sz, int p, int mcnt, double lambda,
 
 	double sumdiff;
 	int h, i, j, ki, ni, cntwi = 0, cntl = 0;
-	int *permedK, *permedN;
+	int *updateorderK, *updateorderN;
 	double *S, *Lold, *Told, *W;
 
 	Lold = (double*)malloc(sz*mcnt*sizeof(double));
@@ -279,13 +279,13 @@ void performMGL(double *data, double *L, int sz, int p, int mcnt, double lambda,
 	calculateCovariance(L, sz, mcnt, S);
 	updateTheta(S, lambda, mcnt, W, T);
 
-	permedK = (int *) malloc(mcnt*sizeof(int));
-	permedN = (int *) malloc(sz*sizeof(int));
+	updateorderK = (int *) malloc(mcnt*sizeof(int));
+	updateorderN = (int *) malloc(sz*sizeof(int));
 	for (ki = 0; ki < mcnt; ki++) {
-		permedK[ki] = ki;
+		updateorderK[ki] = ki;
 	}
 	for (ni = 0; ni < sz; ni++) {
-		permedN[ni] = ni;
+		updateorderN[ni] = ni;
 	}
 	do {
 		//************** UPDATE Z **************//
@@ -309,7 +309,7 @@ void performMGL(double *data, double *L, int sz, int p, int mcnt, double lambda,
 
 			// start updating Ls
 			for(ki=0; ki<mcnt; ki++) {
-				int k = permedK[ki];
+				int k = updateorderK[ki];
 				double denom1 = 0.0;
 				for(i=0; i<p; i++) {
 					if(Z[i] == k) {
@@ -320,7 +320,7 @@ void performMGL(double *data, double *L, int sz, int p, int mcnt, double lambda,
 				double factor = sz/(sz-1);
 				
 				for(ni=0; ni<sz; ni++) {
-					int n = permedN[ni];
+					int n = updateorderN[ni];
 					// get x[n, s]
 					double sumx=0, suml=0;
 					for(i=0; i<p; i++) {
@@ -365,8 +365,8 @@ void performMGL(double *data, double *L, int sz, int p, int mcnt, double lambda,
 
 	free(Lold);
 	free(Told);
-	free(permedK);
-	free(permedN);
+	free(updateorderK);
+	free(updateorderN);
 	free(S);
 	free(W);
 }
